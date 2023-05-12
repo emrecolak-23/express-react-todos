@@ -5,7 +5,7 @@ import cors from 'cors'
 import cookieSession from 'cookie-session'
 
 // Import Routes
-import { signupRouter } from './routes/auth/index'
+import { signupRouter, signinRouter } from './routes/auth/index'
 
 
 // Import Middlewares
@@ -30,6 +30,7 @@ app.use(cookieSession({
 
 // Auth Routes
 app.use(signupRouter)
+app.use(signinRouter)
 
 
 app.all('*',  (req, res, next) => {
