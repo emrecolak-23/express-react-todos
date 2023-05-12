@@ -1,30 +1,16 @@
-import express, {Request, Response} from 'express'
+import express, { Request, Response } from 'express'
 import path from 'path'
 import { body } from 'express-validator';
-import { UploadedFile } from 'express-fileupload';
 
 
 
-import { Todo, TodoAttrs } from '../../models/todo'
-import { BadRequestError } from '../../errors/bad-request-error';
+import { Todo } from '../../models/todo'
 import { requireAuth } from '../../middlewares/require-auth'
 import { validateRequest } from '../../middlewares/validate-request';
+import { uploadFile } from '../../middlewares/upload-file';
 
 
 const router = express.Router()
-
-const validateFile = [
-    body('file').custom((value, { req }) => {
-      if (req.files.image) {
-        const ext = path.extname(req.files.image.name).toLowerCase();
-        const isImage = ['.jpg', '.jpeg', '.png', '.gif'].includes(ext);
-        if(!isImage) {
-            throw new Error('Must be image file')
-        }
-      }
-      return true;
-    })
-];
 
 
 router.post('/api/todos', requireAuth,
@@ -37,60 +23,26 @@ router.post('/api/todos', requireAuth,
             .optional()
             .isString()
             .withMessage('Tag must be valid'),
+        body('file').custom((value, { req }) => {
+            if (req.files.image) {
+                const ext = path.extname(req.files.image.name).toLowerCase();
+                const isImage = ['.jpg', '.jpeg', '.png', '.gif'].includes(ext);
+                if (!isImage) {
+                    throw new Error('Must be image file')
+                }
+            }
+            return true;
+        })
     ],
-    validateFile,
     validateRequest,
-async (req:Request, res: Response) => {
-    const image = req.files!.image as UploadedFile
-    const file = req.files!.file as UploadedFile
-    const uploads: TodoAttrs = {
-        title: req.body.title,
-        userId: req.currentUser!.id
-    }
+    uploadFile,
+    async (req: Request, res: Response) => {
 
+        req.body.userId = req.currentUser!.id
+        const todo = Todo.build(req.body)
 
-    if(image) {
-        const folderPath = path.join(
-            __dirname,
-            '../',
-            '../',
-            'uploads',
-            'thumbnail',
-            image.name
-          );
-        image.mv(folderPath, async (err) => {
-            if (err) {
-                throw new BadRequestError(err.message);
-            }
-        })
+        await todo.save()
+        res.status(201).send(todo)
+    })
 
-        uploads.image = image.name
-
-    }
-    
-    if(file) {
-        const folderPath = path.join(
-            __dirname,
-            '../',
-            '../',
-            'uploads',
-            'files',
-            file.name
-          );
-        file.mv(folderPath, async (err) => {
-            if (err) {
-                throw new BadRequestError(err.message);
-            }
-        })
-
-        uploads.file = file.name
-    }
-
-
-    const todo = Todo.build(uploads)
-
-    await todo.save()
-    res.status(201).send(todo)
-})
-
-export {router as createTodoRouter}
+export { router as createTodoRouter }
