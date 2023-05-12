@@ -5,6 +5,7 @@ import { BadRequestError } from '../../errors/bad-request-error'
 import { body } from 'express-validator'
 
 import { validateRequest } from '../../middlewares/validate-request'
+import jwt from 'jsonwebtoken'
 
 // Create Router
 const router = express.Router()
@@ -35,6 +36,17 @@ async (req: Request, res: Response) => {
 
     const user = User.build({displayName, email, password})
     await user.save()
+
+    // Generate JWT
+    const userJwt = jwt.sign({
+        id: user.id,
+        email: user.email,
+    }, process.env.JWT_KEY!)
+
+    // Store user on session object
+    req.session = {
+        jwt: userJwt
+    }
 
     res.status(201).json(user)
 })

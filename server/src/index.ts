@@ -7,6 +7,10 @@ import {app} from './app'
 
 const start = async () => {
 
+    if(!process.env.JWT_KEY) {
+        throw new Error('JWT_KEY must be defined')
+    }
+
     if(!process.env.API_PORT) {
         throw new Error('API_PORT must be defined')
     }
@@ -23,9 +27,7 @@ const start = async () => {
         console.log(err)
     }
 
-
     const PORT = process.env.API_PORT
-
     app.listen(PORT, () => {
         console.log(`Server listening on ${PORT}`)
     })

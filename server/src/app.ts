@@ -2,6 +2,7 @@
 import express from 'express'
 import 'express-async-errors'
 import cors from 'cors'
+import cookieSession from 'cookie-session'
 
 // Import Routes
 import { signupRouter } from './routes/auth/index'
@@ -21,6 +22,10 @@ const app = express()
 app.use(express.json())
 app.use(cors({
     credentials: true,
+}))
+app.use(cookieSession({
+    signed: false,
+    secure: process.env.NODE_ENV === 'production'
 }))
 
 // Auth Routes
