@@ -1,7 +1,14 @@
 // Import Dependencies
 import express from 'express'
+import 'express-async-errors'
 import cors from 'cors'
 
+
+// Import Middlewares
+import { errorHandler } from './middlewares/error-handler'
+
+// Import Error
+import { NotFoundError } from './errors/not-found-error'
 
 // Initialize express
 const app = express()
@@ -13,5 +20,11 @@ app.use(cors({
     credentials: true,
 }))
 
+
+app.all('*',  (req, res, next) => {
+    next(new NotFoundError())
+})
+
+app.use(errorHandler)
 
 export {app}

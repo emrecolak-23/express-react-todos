@@ -8,13 +8,11 @@ import {app} from './app'
 const start = async () => {
 
     if(!process.env.API_PORT) {
-        console.log('API_PORT must be defined')
-        return
+        throw new Error('API_PORT must be defined')
     }
 
     if(!process.env.MONGO_URI) {
-        console.log('MONGO_URI must be defined')
-        return
+        throw new Error('MONGO_URI must be defined')
     }
 
     try {
