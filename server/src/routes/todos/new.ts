@@ -1,12 +1,14 @@
 import express, {Request, Response} from 'express'
-
-import { Todo, TodoAttrs } from '../../models/todo'
-import { requireAuth } from '../../middlewares/require-auth'
-import { UploadedFile } from 'express-fileupload';
-import { BadRequestError } from '../../errors/bad-request-error';
-import { validateRequest } from '../../middlewares/validate-request';
 import path from 'path'
 import { body } from 'express-validator';
+import { UploadedFile } from 'express-fileupload';
+
+
+
+import { Todo, TodoAttrs } from '../../models/todo'
+import { BadRequestError } from '../../errors/bad-request-error';
+import { requireAuth } from '../../middlewares/require-auth'
+import { validateRequest } from '../../middlewares/validate-request';
 
 
 const router = express.Router()

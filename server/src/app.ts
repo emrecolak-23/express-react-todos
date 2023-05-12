@@ -7,7 +7,7 @@ import fileUpload from 'express-fileupload'
 
 // Import Routes
 import { signupRouter, signinRouter, currentUserRouter, signoutRouter } from './routes/auth/index'
-import {createTodoRouter} from './routes/todos'
+import {createTodoRouter, listTodosRouter, showTodoRouter} from './routes/todos'
 
 // Import Middlewares
 import { errorHandler } from './middlewares/error-handler'
@@ -42,6 +42,8 @@ app.use(signoutRouter)
 
 // Todo Routes
 app.use(createTodoRouter)
+app.use(listTodosRouter)
+app.use(showTodoRouter)
 
 
 app.all('*',  (req, res, next) => {
