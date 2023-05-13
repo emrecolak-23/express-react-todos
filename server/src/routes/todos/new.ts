@@ -23,7 +23,7 @@ router.post('/api/todos', requireAuth,
             .optional()
             .isString()
             .withMessage('Tag must be valid'),
-        body('file').custom((value, { req }) => {
+        body('image').optional().custom((value, { req }) => {
             if (req.files.image) {
                 const ext = path.extname(req.files.image.name).toLowerCase();
                 const isImage = ['.jpg', '.jpeg', '.png', '.gif'].includes(ext);
