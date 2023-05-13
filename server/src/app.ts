@@ -7,7 +7,7 @@ import fileUpload from 'express-fileupload'
 
 // Import Routes
 import { signupRouter, signinRouter, currentUserRouter, signoutRouter } from './routes/auth/index'
-import {createTodoRouter, listTodosRouter, showTodoRouter, deleteTodoRouter, updateTodoRouter} from './routes/todos'
+import { createTodoRouter, listTodosRouter, showTodoRouter, deleteTodoRouter, updateTodoRouter } from './routes/todos'
 
 // Import Middlewares
 import { errorHandler } from './middlewares/error-handler'
@@ -22,10 +22,11 @@ const app = express()
 
 // Middlewares
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(fileUpload())
 app.use(cors({
     credentials: true,
+    origin: 'http://localhost:5173'
 }))
 app.use(cookieSession({
     signed: false,
@@ -47,10 +48,10 @@ app.use(showTodoRouter)
 app.use(deleteTodoRouter)
 app.use(updateTodoRouter)
 
-app.all('*',  (req, res, next) => {
+app.all('*', (req, res, next) => {
     next(new NotFoundError())
 })
 
 app.use(errorHandler)
 
-export {app}
+export { app }

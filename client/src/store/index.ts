@@ -10,3 +10,6 @@ export type RootState = ReturnType<typeof rootReducer>
 export const store = configureStore({
     reducer: rootReducer
 })
+
+export * from './thunks/auth/signUp'
+export * from './thunks/auth/signIn'
