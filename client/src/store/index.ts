@@ -13,3 +13,4 @@ export const store = configureStore({
 
 export * from './thunks/auth/signUp'
 export * from './thunks/auth/signIn'
+export * from './thunks/auth/signOut'
