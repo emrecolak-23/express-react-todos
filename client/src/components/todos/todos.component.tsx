@@ -7,6 +7,7 @@ import { getTodos } from '../../store/thunks/todos/getTodos'
 import { useEffect, useState } from 'react'
 import { TodoData } from '../../store/slices/todo-slice'
 import { RootState } from '../../store'
+import Skeleton from '../skeleton/skeleton.component'
 
 function Todos() {
 
@@ -14,9 +15,11 @@ function Todos() {
     const [filteredTag, setFilteredTag] = useState<string | null>(null)
     const [filteredSearchTerm, setFilteredSearchTerm] = useState('')
     
-    const todos = useSelector<RootState, TodoData[]>((state) => {
-        return state.todos.todos
+    const [todos, isLoading] = useSelector<RootState, [TodoData[], boolean]>((state):[TodoData[], boolean] => {
+        return [state.todos.todos, state.todos.isLoading]
     })
+
+
 
     useEffect(() => {
         dispatch<any>(getTodos())
@@ -43,18 +46,21 @@ function Todos() {
     filteredTodos = todos.filter(todo => {
         return todo.title.toLowerCase().substring(0, filteredSearchTerm.length) == filteredSearchTerm.toLowerCase()
     })
-    
+
+
 
 
     return <TodosContainer>
         <TodoFilter onChangeTag={filterChangeHandler} onChangeSearch={searchChangeHandler} />
          {
+
+                isLoading ? <Skeleton/> :
                 filteredTodos.map(todo => {
                     return  <ExpandablePanel key={todo.id} title={todo.title} image={todo.image || ''}>
                         <TodoDetail title={todo.title} tag={todo.tag || ''} id={todo.id} file={todo.file || ''}/>
                     </ExpandablePanel>
                 })
-            }
+        }
        
     </TodosContainer>
 }

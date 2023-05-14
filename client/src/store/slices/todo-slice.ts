@@ -28,7 +28,11 @@ const initialState: INITIAL_STATE = {
 const todoSlice = createSlice({
     name: 'todo',
     initialState,
-    reducers: {},
+    reducers: {
+        defaultState(state) {
+            state.todos = []
+        },
+    },
     extraReducers(builder) {
         builder.addCase(addTodo.pending, (state, _) => {
             state.isLoading = true
@@ -88,3 +92,4 @@ const todoSlice = createSlice({
 
 export const todoReducer = todoSlice.reducer
 
+export const { defaultState } = todoSlice.actions

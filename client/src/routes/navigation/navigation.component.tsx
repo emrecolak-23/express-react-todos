@@ -8,6 +8,7 @@ import { RootState } from "../../store";
 import { UserData } from "../../store/slices/auth-slice";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../store";
+import { defaultState } from "../../store/slices/todo-slice";
 function Navigation() {
     const dispatch = useDispatch()
 
@@ -17,6 +18,7 @@ function Navigation() {
 
     const handleSignOut = () => {
         dispatch<any>(signOut())
+        dispatch<any>(defaultState())
     }
 
     let authLink;
