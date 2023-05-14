@@ -55,8 +55,6 @@ We can use mongoose orm to connect database. This connection codes located on in
 # Models Schemas
 ![Ekran Resmi 2023-05-14 11 41 16](https://github.com/emrecolak-23/express-react-todos/assets/76963353/ced58d22-5c6c-4d2e-9caa-fe2b4571c16d)
 
-![Ekran Resmi 2023-05-14 11 43 30](https://github.com/emrecolak-23/express-react-todos/assets/76963353/ed8010c1-3585-4ebb-af81-4ea87102e961)
-
 # Application Review
 
 ![Ekran Resmi 2023-05-14 11 49 13](https://github.com/emrecolak-23/express-react-todos/assets/76963353/7a2da953-87e2-416c-949e-27262bfca9ea)
