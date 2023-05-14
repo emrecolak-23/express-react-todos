@@ -8,7 +8,9 @@ type DownloadParam = {
 }
 
 export const downloadFile = createAsyncThunk('todo/downloadFile', async (payload: DownloadParam) => {
-    const response = await todo.post('/download/file', payload)
+    const response = await todo.post('/download/file', payload, {
+        responseType: 'blob',
+    })
     fileDownload(response.data, 'file.pdf')
 
 })

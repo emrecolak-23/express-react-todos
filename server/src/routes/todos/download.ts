@@ -8,7 +8,6 @@ const router = express.Router()
 
 router.post('/api/todos/download/file', requireAuth, async (req: Request, res: Response) => {
     const { id, file } = req.body
-
     const todo = await Todo.findById(id)
 
     if (!todo) {
@@ -19,7 +18,6 @@ router.post('/api/todos/download/file', requireAuth, async (req: Request, res: R
         throw new NotAuthorizedError()
     }
 
-    console.log(file)
     const filePath = path.join(__dirname, '..', '..', 'uploads', 'files', file)
     res.download(filePath);
 })

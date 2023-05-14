@@ -45,10 +45,10 @@ app.use(signoutRouter)
 // Todo Routes
 app.use(createTodoRouter)
 app.use(listTodosRouter)
+app.use(downloadFileRouter)
 app.use(showTodoRouter)
 app.use(deleteTodoRouter)
 app.use(updateTodoRouter)
-app.use(downloadFileRouter)
 
 app.use('/thumbnail',
     express.static(path.join(__dirname, "./uploads/thumbnail"))
