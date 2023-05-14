@@ -10,7 +10,7 @@
     "install": "npm run install-client && npm run install-server",
     "server": "npm start --prefix server",
     "client": "npm run dev --prefix client",
-    "deploy": "npm run build --prefix client && npm start --prefix server",
+    "deploy": "npm run build --prefix client && npm run build-prod --prefix server && npm start --prefix server",
     "test": "npm test --prefix server"
   },
   "repository": {
