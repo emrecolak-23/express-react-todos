@@ -3,19 +3,19 @@ import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-import {app} from './app'
+import { app } from './app'
 
 const start = async () => {
 
-    if(!process.env.JWT_KEY) {
+    if (!process.env.JWT_KEY) {
         throw new Error('JWT_KEY must be defined')
     }
 
-    if(!process.env.API_PORT) {
+    if (!process.env.API_PORT) {
         throw new Error('API_PORT must be defined')
     }
 
-    if(!process.env.MONGO_URI) {
+    if (!process.env.MONGO_URI) {
         throw new Error('MONGO_URI must be defined')
     }
 
@@ -23,7 +23,7 @@ const start = async () => {
         await mongoose.connect(process.env.MONGO_URI)
         console.log('Connected to MongoDB')
 
-    } catch(err) {
+    } catch (err) {
         console.log(err)
     }
 

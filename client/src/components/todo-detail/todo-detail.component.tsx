@@ -1,4 +1,3 @@
-import FormInput from "../form-input/form-input.component"
 import {FC} from 'react'
 import { TodoDetailContainer } from "./todo-detail.styles"
 import TodoUpdateForm from "../todo-update-form/todo-update-form.component"

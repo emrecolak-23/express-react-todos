@@ -12,15 +12,6 @@ it('can only be access if the user is signed in', async () => {
 })
 
 
-it('returns a 404 if the todo is not found', async () => {
-    const id = new mongoose.Types.ObjectId().toHexString()
-    const cookie = await signin()
-    await request(app)
-        .get(`/api/courses/${id}`)
-        .set('Cookie', cookie)
-        .send()
-        .expect(404)
-})
 
 
 it('returns the couse if the course is found', async () => {

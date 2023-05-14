@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(fileUpload())
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5173'
+    origin: ['http://localhost:5173', 'http://localhost:3000']
 }))
 app.use(cookieSession({
     signed: false,
@@ -51,8 +51,19 @@ app.use(deleteTodoRouter)
 app.use(updateTodoRouter)
 
 app.use('/thumbnail',
-    express.static(path.join(__dirname, "./uploads/thumbnail"))
+    express.static(path.join(__dirname, "../uploads/thumbnail"))
 );
+
+app.use(
+    express.static(path.join(__dirname, "../../../client/dist"))
+);
+
+app.get("*", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "../client/dist/index.html")
+    )
+})
+
 
 app.all('*', (req, res, next) => {
     next(new NotFoundError())

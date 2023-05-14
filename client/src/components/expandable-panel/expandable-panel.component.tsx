@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FC, ReactNode } from 'react';
 import { ExpandablePanelContainer, ExpandablePanelTitleContainer, ExpandablePanelTitle, ExpandablePanelImage } from './expandable-panel.styles';
 import { GoChevronDown, GoChevronLeft } from 'react-icons/go';
-import { FiPaperclip } from 'react-icons/fi';
 
 type ExpandablePanel = {
     title: string,
@@ -20,7 +19,7 @@ const ExpandablePanel:FC<ExpandablePanel> = ({ title, children, image })  => {
   return (
     <ExpandablePanelContainer>
       <ExpandablePanelTitleContainer>
-        <ExpandablePanelImage src={image ? `http://localhost:3000/thumbnail/${image}` : 'https://random.imagecdn.app/500/150'} />
+        <ExpandablePanelImage src={image ? `/thumbnail/${image}` : 'https://random.imagecdn.app/500/150'} />
         <ExpandablePanelTitle>
           {title}
         </ExpandablePanelTitle>
