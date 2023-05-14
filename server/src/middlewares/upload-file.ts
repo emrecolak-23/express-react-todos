@@ -13,6 +13,7 @@ export const uploadFile = (req: Request, res: Response, next: NextFunction) => {
         const folderPath = path.join(
             __dirname,
             '../',
+            '../',
             'uploads',
             'thumbnail',
             image.name
@@ -30,6 +31,7 @@ export const uploadFile = (req: Request, res: Response, next: NextFunction) => {
     if (file) {
         const folderPath = path.join(
             __dirname,
+            '../',
             '../',
             'uploads',
             'files',
