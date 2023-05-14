@@ -18,7 +18,7 @@ router.post('/api/todos/download/file', requireAuth, async (req: Request, res: R
         throw new NotAuthorizedError()
     }
 
-    const filePath = path.join(__dirname, '..', '..', 'uploads', 'files', file)
+    const filePath = path.join(__dirname, '..', '..', '..', 'uploads', 'files', file)
     res.download(filePath);
 })
 
