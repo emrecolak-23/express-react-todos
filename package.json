@@ -11,7 +11,7 @@
     "server": "npm start --prefix server",
     "client": "npm run dev --prefix client",
     "deploy": "npm run build --prefix client && npm start --prefix server",
-    "test": "npm run test --prefix server"
+    "test": "npm test --prefix server"
   },
   "repository": {
     "type": "git",
