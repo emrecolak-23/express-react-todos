@@ -7,7 +7,7 @@ export const BaseButton = styled.button`
   height: 50px;
   letter-spacing: 0.5px;
   line-height: 50px;
-  padding: 0 20px 0 20px;
+  padding: 0 10px 0 10px;
   font-size: 15px;
   background-color: black;
   color: white;

@@ -37,8 +37,9 @@ router.post('/api/todos', requireAuth,
     validateRequest,
     uploadFile,
     async (req: Request, res: Response) => {
-
+        console.log(req.body)
         req.body.userId = req.currentUser!.id
+        console.log(req.body)
         const todo = Todo.build(req.body)
 
         await todo.save()

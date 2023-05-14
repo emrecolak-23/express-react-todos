@@ -10,7 +10,7 @@ const shrinkLabelStyles = css`
 `;
 
 type FormInputLabelProps = {
-    shrink?: boolean
+  shrink?: boolean
 }
 
 export const FormInputLabel = styled.label<FormInputLabelProps>`

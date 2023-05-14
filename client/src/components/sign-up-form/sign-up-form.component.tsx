@@ -5,6 +5,7 @@ import Button from "../button/button.component";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 interface FormValue {
     displayName: string,
@@ -21,6 +22,7 @@ const defaultFormFields: FormValue = {
 
 function SignUpForm() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [formFields, setFormFields] = useState<FormValue>(defaultFormFields)
     const {displayName, email, password} = formFields
@@ -37,7 +39,9 @@ function SignUpForm() {
      
         dispatch<any>(signUp(formFields))
 
-        setFormFields(defaultFormFields);      
+        setFormFields(defaultFormFields);
+        navigate('/')
+
     }
 
     return <SignUpContainer>

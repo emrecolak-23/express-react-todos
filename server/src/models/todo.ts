@@ -40,8 +40,8 @@ const todoSchema = new mongoose.Schema({
     },
     tag: {
         type: String,
-        enum: ["business", "personal", "sport"],
-        default: 'personal'
+        enum: ["Business", "Personal", "Sport"],
+        default: 'Personal'
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -53,7 +53,7 @@ const todoSchema = new mongoose.Schema({
             ret.id = ret._id
             delete ret._id
             delete ret.__v
-        } 
+        }
     }
 })
 
@@ -63,4 +63,4 @@ todoSchema.statics.build = (attrs: TodoAttrs) => {
 
 const Todo = mongoose.model<TodoDoc, TodoModel>('Todo', todoSchema)
 
-export {Todo}
+export { Todo }

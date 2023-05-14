@@ -26,7 +26,9 @@ const initialState: INITIAL_STATE = {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers(builder) {
         builder.addCase(signUp.pending, (state, _) => {
             state.isLoading = true

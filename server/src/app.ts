@@ -4,10 +4,11 @@ import 'express-async-errors'
 import cors from 'cors'
 import cookieSession from 'cookie-session'
 import fileUpload from 'express-fileupload'
+import path from 'path'
 
 // Import Routes
 import { signupRouter, signinRouter, currentUserRouter, signoutRouter } from './routes/auth/index'
-import { createTodoRouter, listTodosRouter, showTodoRouter, deleteTodoRouter, updateTodoRouter } from './routes/todos'
+import { createTodoRouter, listTodosRouter, showTodoRouter, deleteTodoRouter, updateTodoRouter, downloadFileRouter } from './routes/todos'
 
 // Import Middlewares
 import { errorHandler } from './middlewares/error-handler'
@@ -47,6 +48,11 @@ app.use(listTodosRouter)
 app.use(showTodoRouter)
 app.use(deleteTodoRouter)
 app.use(updateTodoRouter)
+app.use(downloadFileRouter)
+
+app.use('/thumbnail',
+    express.static(path.join(__dirname, "./uploads/thumbnail"))
+);
 
 app.all('*', (req, res, next) => {
     next(new NotFoundError())
